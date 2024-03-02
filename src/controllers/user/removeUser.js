@@ -1,16 +1,11 @@
-import { users } from "../../db-memory/user.js"
+import userModel from "../../models/userModel.js"
 
 const remove = (req, res) => {
     const deleted = req.body
-    users.map((user, index) => {
-        if (user.id === deleted.id) {
-            users.splice(index, 1)
-        }
-
-    })
+    
     res.json({
-        success: "Usuário deletado com sucesso",
-        users
+        success: `Usuário${deleted.id} deletado com sucesso`,
+        users: userModel.remove(deleted)
     })
 }
 

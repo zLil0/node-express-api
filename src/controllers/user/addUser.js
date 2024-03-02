@@ -1,12 +1,11 @@
-import { users } from "../../db-memory/user.js"
-
+import userModel from "../../models/userModel.js"
 
 const addUser = (req, res) => {
     const user = req.body
     
     res.json({
-        success: "Usuários listados com sucesso",
-        users
+        success: "Usuário adicionado com sucesso",
+        users: userModel.add(user)
     })
 }
 
