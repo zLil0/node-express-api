@@ -1,9 +1,9 @@
-import { products } from "../../db-memory/products.js"
+import productModel from "../../models/productModel.js"
 
 const listAll = (req, res) => {
     res.json({
         success: "Produtos listados com sucesso",
-        products
+        products: productModel.list()
     })
 }
 

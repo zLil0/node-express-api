@@ -1,5 +1,4 @@
 import express from 'express'
-import { users } from '../db-memory/user.js'
 import listAll from '../controllers/user/listAllUser.js'
 import addUser from '../controllers/user/addUser.js'
 import remove from '../controllers/user/removeUser.js'

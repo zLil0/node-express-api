@@ -22,21 +22,23 @@ const add = (user) => {
 }
 
 const edit = (updated) => {
-    return users.map((user, index) => {
+    users.map((user, index) => {
         if (user.id === updated.id) {
             if (updated.name) users[index].name = updated.name
             if (updated.avatar) users[index].avatar = updated.avatar
             if (updated.email) users[index].email = updated.email
         }
     })
+    return users
 }
 
 const remove  = (deleted) => {
-    return users.map((user, index) => {
+    users.map((user, index) => {
         if (user.id === deleted.id) {
             users.splice(index, 1)
         }
     })
+    return users
 }
 
 export default { list, add, edit, remove }

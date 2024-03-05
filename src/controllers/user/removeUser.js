@@ -4,7 +4,7 @@ const remove = (req, res) => {
     const deleted = req.body
     
     res.json({
-        success: `Usuário${deleted.id} deletado com sucesso`,
+        success: `Usuário id:${deleted.id} deletado com sucesso`,
         users: userModel.remove(deleted)
     })
 }
