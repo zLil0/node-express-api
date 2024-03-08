@@ -1,18 +1,40 @@
 import { users } from "../db-memory/user.js"
 import { z } from 'zod'
+
 const userSchema = z.object({
-    id: z.number({
-        required_error: "ID é obrigatório.",
-        invalid_type_error: "ID deve ser um número."
-    }),
-    name: z.string(),
-    email: z.string(),
-    avatar: z.string(),
+    id: z
+        .number({
+            required_error: "ID obrigatório.",
+            invalid_type_error: "ID deve ser um número."
+        }),
+    name: z
+        .string({
+            required_error: "Nome obrigatório.",
+            invalid_type_error: "Nome deve ser um texto."
+        })
+        .min(3)
+        .max(200),
+    email: z
+        .string({
+            required_error: "Email obrigatório.",
+            invalid_type_error: "Email deve ser um texto."
+        })
+        .email({ message: 'Email inválido.' }),
+    avatar: z
+        .string({
+            required_error: "Avatar Url obrigatório.",
+            invalid_type_error: "Url do avatar deve ser um texto."
+        })
+        .url({ message: 'Url do avatar inválido.' }),
 })
 
 
 const list = () => {
     return users
+}
+
+const getUser = (id) => {
+    return users.find(user => user.id === id)
 }
 
 const add = (user) => {
@@ -32,7 +54,7 @@ const edit = (updated) => {
     return users
 }
 
-const remove  = (deleted) => {
+const remove = (deleted) => {
     users.map((user, index) => {
         if (user.id === deleted.id) {
             users.splice(index, 1)
@@ -41,4 +63,10 @@ const remove  = (deleted) => {
     return users
 }
 
-export default { list, add, edit, remove }
+const validateAdd = (user) => {
+    const partialUserSchema = userSchema.partial({id: true})
+    console.log(userSchema.safeParse(user))
+    return partialUserSchema.safeParse(user)
+}
+
+export default { list, add, edit, remove, validateAdd, getUser}
