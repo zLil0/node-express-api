@@ -65,13 +65,11 @@ const remove = (deleted) => {
 
 const validateAdd = (user) => {
     const partialUserSchema = userSchema.partial({id: true})
-    console.log(userSchema.safeParse(user))
     return partialUserSchema.safeParse(user)
 }
 
 const validateId = (user) => {
     const partialUserSchema = userSchema.partial({name: true, avatar: true, email: true})
-    console.log(userSchema.safeParse(user))
     return partialUserSchema.safeParse(user)
 }
 
