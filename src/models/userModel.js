@@ -69,4 +69,10 @@ const validateAdd = (user) => {
     return partialUserSchema.safeParse(user)
 }
 
-export default { list, add, edit, remove, validateAdd, getUser}
+const validateId = (user) => {
+    const partialUserSchema = userSchema.partial({name: true, avatar: true, email: true})
+    console.log(userSchema.safeParse(user))
+    return partialUserSchema.safeParse(user)
+}
+
+export default { list, add, edit, remove, validateAdd, validateId, getUser}

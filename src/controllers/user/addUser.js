@@ -11,7 +11,7 @@ const addUser = (req, res) => {
 	}
     res.json({
         success: "Usuário adicionado com sucesso",
-        users: userModel.add(user)
+        users: userModel.add(dataValidated.data)
     })
 }
 
