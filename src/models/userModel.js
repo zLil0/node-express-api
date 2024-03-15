@@ -1,5 +1,8 @@
 import { users } from "../db-memory/user.js"
 import { z } from 'zod'
+import { PrismaClient } from '@prisma/client/edge'
+
+const prisma = new PrismaClient()
 
 const userSchema = z.object({
     id: z
