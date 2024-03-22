@@ -1,6 +1,6 @@
 import userModel from "../../models/userModel.js"
 
-const addUser = (req, res) => {
+const addUser = async (req, res) => {
     const user = req.body
     const dataValidated = userModel.validateAdd(user)
     if(!dataValidated.success){
@@ -11,7 +11,7 @@ const addUser = (req, res) => {
 	}
     res.json({
         success: "Usuário adicionado com sucesso",
-        users: userModel.add(dataValidated.data)
+        users: await userModel.add(dataValidated.data)
     })
 }
 

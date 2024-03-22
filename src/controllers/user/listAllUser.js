@@ -1,10 +1,10 @@
 import userModel from "../../models/userModel.js"
 
 
-const listAll = (req, res) => {
+const listAll = async (req, res) => {
     res.json({
         success: "Usuários listados com sucesso",
-        users: userModel.list()
+        users:  await userModel.list()
     })
 }
 

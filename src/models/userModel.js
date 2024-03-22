@@ -1,6 +1,6 @@
 import { users } from "../db-memory/user.js"
 import { z } from 'zod'
-import { PrismaClient } from '@prisma/client/edge'
+import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
@@ -32,38 +32,39 @@ const userSchema = z.object({
 })
 
 
-const list = () => {
-    return users
+const list = async () => {
+    return await prisma.user.findMany()
 }
 
-const getUser = (id) => {
-    return users.find(user => user.id === id)
+const getUser = async (id) => {
+	return await prisma.user.findUnique({
+		where: {
+			id
+		}
+	})
 }
 
-const add = (user) => {
-    user.id = users[users.length - 1].id + 1
-    users.push(user)
-    return users
+const add = async (user) =>{
+    return await prisma.user.create({
+		data: user
+	})
 }
 
-const edit = (updated) => {
-    users.map((user, index) => {
-        if (user.id === updated.id) {
-            if (updated.name) users[index].name = updated.name
-            if (updated.avatar) users[index].avatar = updated.avatar
-            if (updated.email) users[index].email = updated.email
-        }
-    })
-    return users
+const edit = async (updated) => {
+    return await prisma.user.update({
+		where:{
+			id: updated.id
+		},
+		data: updated
+	})
 }
 
-const remove = (deleted) => {
-    users.map((user, index) => {
-        if (user.id === deleted.id) {
-            users.splice(index, 1)
-        }
-    })
-    return users
+const remove = async (id) => {
+    return await prisma.user.delete({
+		where: {
+			id
+		}
+	})
 }
 
 const validateAdd = (user) => {

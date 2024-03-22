@@ -1,6 +1,6 @@
 import userModel from "../../models/userModel.js"
 
-const edit = (req, res) => {
+const edit = async (req, res) => {
     const updated = req.body
     const dataValidated = userModel.validateId(updated)
     if(!dataValidated.success){
@@ -11,7 +11,7 @@ const edit = (req, res) => {
 	}
     res.json({
         success: `Usuário ${updated.id} atualizado com sucesso`,
-        users: userModel.edit(updated)
+        users: await userModel.edit(updated)
     })
 }
 

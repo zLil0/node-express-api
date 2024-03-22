@@ -15,8 +15,9 @@ model products {
 }
 
 model user {
-  id     BigInt @id @default(autoincrement())
+  id     Int    @id @default(autoincrement())
   name   String @db.VarChar(200)
   avatar String @db.Text
   email  String @db.VarChar(200)
+  pass   String @db.VarChar(500)
 }
