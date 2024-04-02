@@ -9,9 +9,11 @@ const edit = async (req, res) => {
 			fields: dataValidated.error.flatten().fieldErrors
 		})
 	}
+    const result = await userModel.edit(updated)
+    delete result.pass
     res.json({
         success: `Usuário ${updated.id} atualizado com sucesso`,
-        users: await userModel.edit(updated)
+        users: result
     })
 }
 

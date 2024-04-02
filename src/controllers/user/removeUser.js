@@ -9,10 +9,11 @@ const remove = async (req, res) => {
 			fields: dataValidated.error.flatten().fieldErrors
 		})
 	}
-    const usersResult = await userModel.remove(dataValidated.data.id)
+    const result = await userModel.remove(dataValidated.data.id)
+    delete result.pass
     res.json({
         success: `Usuário id:${deleted.id} deletado com sucesso`,
-        users: usersResult
+        users: result
     })
 }
 

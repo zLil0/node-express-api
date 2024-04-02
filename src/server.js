@@ -4,6 +4,7 @@ import { PORT, HOST } from './config.js'
 import logger from "./middlewares/logger.js"
 import userRouter from './routers/userRouter.js'
 import productsRouter from './routers/productsRouter.js'
+import authRouter from './routers/authRouter.js'
 
 const app = express()
 
@@ -16,6 +17,7 @@ app.get('/', (req, res) => {
 
 app.use('/users', userRouter)
 app.use('/products', productsRouter)
+app.use('/auth', authRouter)
 
 
 

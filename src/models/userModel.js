@@ -1,4 +1,3 @@
-import { users } from "../db-memory/user.js"
 import { z } from 'zod'
 import { PrismaClient } from '@prisma/client'
 
@@ -49,6 +48,14 @@ const getUser = async (id) => {
     })
 }
 
+const getByEmail = async (email) => {
+    return await prisma.user.findUnique({
+        where: {
+            email
+        }
+    })
+}
+
 const add = async (user) => {
     return await prisma.user.create({
         data: user
@@ -78,8 +85,8 @@ const validateAdd = (user) => {
 }
 
 const validateId = (user) => {
-    const partialUserSchema = userSchema.partial({ name: true, avatar: true, email: true })
+    const partialUserSchema = userSchema.partial({ name: true, avatar: true, email: true, pass: true })
     return partialUserSchema.safeParse(user)
 }
 
-export default { list, add, edit, remove, validateAdd, validateId, getUser }
+export default { list, add, edit, remove, validateAdd, validateId, getUser, getByEmail}
